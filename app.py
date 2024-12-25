@@ -254,5 +254,6 @@ def rename_folder(folder):
     
     return redirect(url_for('view_folders'))
 
-
+if __name__ == '__main__':
+    app.run(host="0.0.0.0")
 
