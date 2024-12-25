@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Folders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>JINDAL SAW LTD. Samaghoga, Mundra, GUJARAT</h1>
+    </header>
+    <main>
+        <div class="folder-container">
+            {% for folder in folders %}
+            <div class="folder-card">
+                
+                <!-- Folder Name -->
+                <button style="display: block; position: absolute; right: 20px" onclick="showRenameForm('{{ folder }}')">&#8942</button>
+                <h3>{{ folder }}</h3>
+                <a href="{{ url_for('view_folder', folder=folder) }}" class="btn">Open Folder</a>
+                
+                <!-- Delete Folder Button -->
+                <button class="btn-delete" onclick="showPasswordPrompt('{{ folder }}')">Delete Folder</button>
+                
+                <!-- Hidden Password Form -->
+                <form id="delete-password-form-{{ folder }}" 
+                    action="{{ url_for('delete_folder', folder_name=folder) }}" 
+                    method="POST" 
+                    style="display: none;" 
+                    class="password-form">
+                    <input type="password" name="password" placeholder="Enter password" required>
+                    <button type="submit" class="btn btn-confirm-delete">Confirm Delete</button>
+                </form>
+            </div>
+
+            <!-- Rename Folder Modal -->
+            <div id="rename-modal-{{ folder }}" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeRenameForm('{{ folder }}')">×</span>
+                    <h2>Rename Folder  -{{folder}}</h2>
+                    <form id="rename-form-{{ folder }}" method="POST" action="{{ url_for('rename_folder', folder=folder) }}">
+                        <label for="new_name_{{ folder }}">New Name:</label>
+                        <input type="text" id="new_name_{{ folder }}" name="new_name" value="{{ folder }}" required>
+            
+                        <label for="password_{{ folder }}">Password:</label>
+                        <input type="password" id="password_{{ folder }}" name="password" required>
+            
+                        <button type="submit">Rename Folder</button>
+                    </form>
+                </div>
+            </div>            
+            {% endfor %}
+        </div>
+        
+        <form action="{{ url_for('create_folder') }}" method="POST">
+            <label for="folder_name">Create New Folder:</label>
+            <input type="text" name="folder_name" id="folder_name" placeholder="Enter folder name" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password_c" required>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 All Rights Reserved by Prince Patel.</p>
+        </div>
+    </footer>    
+
+    <script>
+        // Show the rename form for a specific folder
+function showRenameForm(folder) {
+    // Set the value of the input field for the specific folder
+    document.getElementById('new_name_' + folder).value = folder;
+
+    // Show the modal for the specific folder
+    document.getElementById('rename-modal-' + folder).style.display = 'flex';
+}
+
+// Close the rename modal for a specific folder
+function closeRenameForm(folder) {
+    // Hide the modal for the specific folder
+    document.getElementById('rename-modal-' + folder).style.display = 'none';
+}
+
+function showPasswordPrompt(folder) {
+    var passwordForm = document.getElementById('delete-password-form-' + folder);
+    passwordForm.style.display = 'block'; // Show the password form
+}
+    </script>    
+</body>
+</html>

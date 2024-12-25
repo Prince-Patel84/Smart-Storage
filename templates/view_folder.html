@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Folder - {{ folder }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Files in {{ folder }}</h1>
+        <nav>
+            <a href="{{ url_for('view_folders') }}">Back to Folders</a>
+        </nav>
+    </header>
+    <main>
+        <div class="file-container">
+            {% for file in files %}
+            <div class="file-card">
+                <!-- File Name Display -->
+                <button style="display: block; position: absolute; right: 20px" onclick="showRenameForm('{{ folder }}', '{{ file.name }}')">&#8942</button>
+                
+                <!-- Display preview image if available -->
+                {% if file.preview_url %}
+                <img src="{{ file.preview_url }}" alt="Preview for {{ file.name }}" class="file-preview">
+                {% endif %}
+                
+                <h3>{{ file.name }}</h3>
+                <!-- Download Button -->
+                <a href="{{ file.download_url }}" class="btn btn-download">Download</a>
+                
+                <!-- Delete File Button -->
+                <form action="{{ url_for('delete_file', folder=folder, filename=file.name) }}" method="POST" style="display:block;">
+                    <button type="button" class="btn btn-delete" onclick="showPasswordPrompt('{{ file.name }}')">Delete</button>
+                    <div id="delete-password-form-{{ file.name }}" class="password-form" style="display:none;">
+                        <input type="password" name="password" placeholder="Enter password" required>
+                        <button type="submit" class="btn btn-confirm-delete">Confirm Delete</button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- Rename File Modal -->
+            <div id="rename-modal-{{ folder }}-{{ file.name }}" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeRenameForm('{{ folder }}', '{{ file.name }}')">×</span>
+                    <h2>Rename File</h2>
+                    <form method="POST" action="{{ url_for('rename_file', folder=folder, filename=file.name) }}">
+                        <label for="new_name_{{ folder }}_{{ file.name }}">New Name:</label>
+                        
+                        <input type="text" id="new_name_{{ folder }}_{{ file.name }}" name="new_name" value="{{ file.name }}" required>
+                        <label for="password_{{ folder }}_{{file.name}}">Password:</label>
+        
+                        <input type="password" id="password_{{ folder }}" name="password_file" required>
+                        <button type="submit">Rename</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Upload File Form -->
+        <form action="{{ url_for('upload_file', folder=folder) }}" method="post" enctype="multipart/form-data">
+            <label for="file">Upload File:</label>
+            <button type="submit" class="btn">Upload</button>
+        </form>
+    </main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul>
+        {% for category, message in messages %}
+        <li class="flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 All Rights Reserved by Prince Patel.</p>
+        </div>
+    </footer>    
+
+    <script>
+        // Function to show the password prompt for deleting a file
+        function showPasswordPrompt(filename) {
+            var passwordForm = document.getElementById('delete-password-form-' + filename);
+            passwordForm.style.display = 'block'; // Show the password form
+        }
+
+        function showRenameForm(folder, filename) {
+            const modalId = `rename-modal-${folder}-${filename}`;
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex'; // Show the modal
+            }
+        }
+        
+        function closeRenameForm(folder, filename) {
+            const modalId = `rename-modal-${folder}-${filename}`;
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none'; // Hide the modal
+            }
+        }
+        
+    </script>    
+</body>
+</html>

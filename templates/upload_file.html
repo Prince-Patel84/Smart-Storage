@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload a file to {{ folder }} folder</h1>
+
+        <form action="{{ url_for('upload_file', folder=folder) }}" method="POST" enctype="multipart/form-data" id="upload-form">
+            <label for="password">Enter Password:</label>
+            <input type="password" id="password" name="password" required><br>
+
+            <label for="file">Select a file:</label>
+            <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg,.txt,.docx,.zip,.rar"><br>
+
+            <button type="submit">Upload</button>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <script>
+        // Optional: You can trigger an alert or modal for the password
+        const form = document.getElementById('upload-form');
+        
+        form.addEventListener('submit', function(event) {
+            const passwordField = document.getElementById('password');
+            const password = passwordField.value;
+            
+            if (!password) {
+                alert('Password is required!');
+                event.preventDefault(); // Prevent form submission if no password
+            }
+        });
+    </script>
+</body>
+</html>

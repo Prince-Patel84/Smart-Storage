@@ -1,0 +1,384 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    background: #f4f7fc;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(90deg, #2c3e50, #007bff);
+    color: #fff;
+    padding: 1.5rem 2rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+header nav {
+    margin-top: 1rem;
+}
+
+header nav a {
+    color: #fff;
+    background-color: #2c3e50;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid white;
+    border-radius: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: white;
+    background-color: #007bff;
+}
+
+/* Main Content */
+main {
+    padding: 3rem 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+/* Folder and File Containers */
+.folder-container, .file-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.folder-card, .file-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1 1 calc(25% - 2rem);
+    max-width: calc(25% - 2rem);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.folder-card:hover, .file-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.folder-card h3, .file-card p {
+    margin-bottom: 1.5rem;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.file-card p {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 auto 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/* Buttons */
+.btn {
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* File Preview */
+.file-preview {
+    max-width: 100%;
+    max-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Forms */
+form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+form input[type="text"], form input[type="file"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background: #4a90e2;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: #357abd;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(90deg, #333, #444);
+    color: #fff;
+    padding: 1.5rem 2rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.footer-container {
+    font-size: 0.9rem;
+}
+
+
+/* Flash messages */
+.success {
+    color: green;
+}
+
+.danger {
+    color: red;
+}
+
+/* Delete button */
+.btn-delete {
+    background-color: red;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+.btn-delete:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+
+/* Password form */
+.password-form {
+    margin-top: 10px;
+}
+
+.password-form input {
+    padding: 8px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: calc(100% - 90px); /* Ensure the input doesn't overflow */
+}
+
+.btn-confirm-delete {
+    background-color: green;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-confirm-delete:hover {
+    background-color: darkgreen;
+    transform: scale(1.05);
+}
+
+/* Dropdown Button (three dots) */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    right: 0;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Modal for Rename Form */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 100%;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* General button styling */
+button {
+    font-family: 'Arial', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Rename button specific styling */
+.btn-rename {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for button size */
+    font-size: 14px; /* Text size */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Hover effect */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 1px; /* Add some spacing to text */
+    margin-top: 10px; /* Add margin for spacing */
+}
+
+.btn-rename:hover {
+    background-color: #45a049; /* Darker green on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
+}
+
+.btn-rename:active {
+    background-color: #3e8e41; /* Even darker green when pressed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Pressed shadow effect */
+    transform: translateY(2px); /* Button press animation */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .folder-card, .file-card {
+        flex: 1 1 calc(50% - 2rem);
+        max-width: calc(50% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .folder-card, .file-card {
+        flex: 1 1 calc(100% - 2rem);
+        max-width: calc(100% - 2rem);
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .file-card p {
+        font-size: 12px;
+    }
+}
