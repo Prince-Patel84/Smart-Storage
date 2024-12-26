@@ -122,7 +122,7 @@ def get_preview(folder_name, filename):
 
     return "Preview not available", 404
 
-# Route to download files
+# Route to download fileswgsi
 @app.route('/download/<folder_name>/<filename>')
 def download_file(folder_name, filename):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
